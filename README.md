@@ -11,12 +11,16 @@ This task is using laravel in MVC and MySQL as database to build the program.
 4) Can be edited player' profile
 
 # How to run
-1) To create a database
+1) Create .env file
+
+2) Run `composer install`
+
+3) To create a database
 - php artisan db:create igdgame
 
-2) Use the migration to create table
-- php artisan make:migration
+4) Use the migration to create table
+- php artisan migrate
 
-3) Use seeder to create fake data into database
+5) Use seeder to create fake data into database
 - php artisan db:seed --class=DatabaseSeeder
  
