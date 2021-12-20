@@ -24,7 +24,7 @@ class GameRecordTableSeeder extends Seeder
 
         //create dump data into game_record and user_game_history (create 1 record in game_record, 2 records will be created in user_game_history)
         GameRecord::factory(300)->create()->each(function(GameRecord $gameRecord){
-            UserGameHistory::factory(2)->create(['FK_game_record_id' => $gameRecord]);
+            UserGameHistory::factory(2)->create(['game_record_id' => $gameRecord]);
         });
     }
 }

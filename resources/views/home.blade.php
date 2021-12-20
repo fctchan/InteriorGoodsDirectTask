@@ -31,7 +31,7 @@
                                     <td>{{ $player->total_loss }}</td>
                                     <td>{{ $player->ttl_match }}</td>
                                     <td>{{ $player->highest_score }} </td>
-                                    <td><a href="{{ route('User.show', $player->uid)}}" class="btn btn-info">Game Record</a></td>
+                                    <td><a href="{{ route('User.show', $player->id)}}" class="btn btn-info">Game Record</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

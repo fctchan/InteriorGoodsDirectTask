@@ -40,7 +40,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         //Validation for input
         $request->validate([
             'username' => 'required|unique:user|min:1',
@@ -53,10 +53,10 @@ class UserController extends Controller
         $user->username = request('username');
         $user->tel = request('telephone');
         $user->email = request('email');
-        
+
         //Call function to data into database
         $saveResult = User::creatNewPlayer($user);
-        
+
         //get all user to user list
         $users = User::getAllUser();
 
@@ -65,7 +65,7 @@ class UserController extends Controller
             return view('User.userlist')->with('newPlayerName', $user->username)->with('users', $users);
         }else{
             return view('User.create')->with('errorConnectDB', 'createNew')->with('users', $users);
-        }        
+        }
     }
 
     /**
@@ -74,23 +74,23 @@ class UserController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($uid)
+    public function show($id)
     {
         //Get selected player data from database
-        $user = User::showUser($uid);
+        $user = User::showUser($id);
 
         //Get highest score
         $highest_score = $user[0]->highest_score;
 
         //Get player highest score data from database
         if ($highest_score != 0){
-            $highestRecord = User::showUserHighesrScore($uid, $highest_score);
+            $highestRecord = User::showUserHighesrScore($id, $highest_score);
             //Render result page with highest score
-            return view('User.gameRecord', compact('user', 'highestRecord'));  
+            return view('User.gameRecord', compact('user', 'highestRecord'));
         }else{
             //Render result page without playing any game
-            return view('User.gameRecord', compact('user')); 
-        }                  
+            return view('User.gameRecord', compact('user'));
+        }
     }
 
     /**
@@ -99,10 +99,10 @@ class UserController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($uid)
-    {   
+    public function edit($id)
+    {
         //Get player information from database
-        $user = User::getUser($uid);
+        $user = User::getUser($id);
 
         //return user information and render page
         return view('User.edit')->with('user', $user);
@@ -115,8 +115,8 @@ class UserController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uid)
-    {   
+    public function update(Request $request, $id)
+    {
         //Validation for input
         $request->validate([
             'telephone' => 'required',
@@ -128,15 +128,15 @@ class UserController extends Controller
         $user->email = request('email');
 
         //find the player by uid and update the data
-        $updateResult = User::updateUser($uid, $user);
+        $updateResult = User::updateUser($id, $user);
 
         //redirect to edit page and pass the update success notice
         if($updateResult){
-            return redirect()->route('User.edit', [$uid])->with('success', true);
+            return redirect()->route('User.edit', [$id])->with('success', true);
         }else {
-            return redirect()->route('User.edit', [$uid])->with('success', false);
+            return redirect()->route('User.edit', [$id])->with('success', false);
         }
-        
+
     }
 
     /**

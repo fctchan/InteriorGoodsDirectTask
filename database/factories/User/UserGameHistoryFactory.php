@@ -21,8 +21,8 @@ class UserGameHistoryFactory extends Factory
     {
         return [
             //'FK_uid' => $this->faker->randomElement(User::lists('uid')->toArray()),
-            'FK_uid' => User::all()->random()->uid,
-            'FK_game_record_id' => function () {
+            'user_id' => User::all()->random()->uid,
+            'game_record_id' => function () {
                 return factory(GameRecord::class)->create()->game_record_id;
             },
             'result' => $this->faker->randomElement(['win', 'lose']),

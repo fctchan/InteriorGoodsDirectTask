@@ -13,9 +13,6 @@ class GameRecord extends Model
 {
     use HasFactory;
 
-    //Use table
-    protected $table = 'game_record';
-
     //Default timestamps set false
     public $timestamps = false;
 
@@ -33,12 +30,12 @@ class GameRecord extends Model
      */
     protected function getTop10()
     {
-        return User::leftJoin('user_game_detail','user.uid','=','user_game_detail.FK_uid')
-                ->leftJoin('user_game_history','user_game_history.FK_uid','=','user.uid')
-                ->selectRaw('user.uid, user.username, user.tel, user.email, user_game_detail.average_score, user_game_detail.total_win, user_game_detail.total_loss, MAX(user_game_history.score) as highest_score, COUNT(user_game_history.FK_uid) AS ttl_match')
-                ->groupBy('user.uid')
+        return User::leftJoin('user_game_details','users.id','=','user_game_details.user_id')
+                ->leftJoin('user_game_histories','user_game_histories.user_id','=','users.id')
+                ->selectRaw('users.id, users.username, users.tel, users.email, user_game_details.average_score, user_game_details.total_win, user_game_details.total_loss, MAX(user_game_histories.score) as highest_score, COUNT(user_game_histories.user_id) AS ttl_match')
+                ->groupBy('users.id')
                 ->havingRaw('ttl_match > 10')
-                ->orderBy('user_game_detail.average_score', 'DESC')
+                ->orderBy('user_game_details.average_score', 'DESC')
                 ->limit(10)
                 ->get();
     }
