@@ -21,7 +21,7 @@ class GameRecord extends Model
 
     /**
      *  Can be filled
-     * 
+     *
      * @var array<dateTime>
      */
     protected $fillable = ['game_date', ];
@@ -33,7 +33,7 @@ class GameRecord extends Model
      */
     protected function getTop10()
     {
-        $players = User::leftJoin('user_game_detail','user.uid','=','user_game_detail.FK_uid')
+        return User::leftJoin('user_game_detail','user.uid','=','user_game_detail.FK_uid')
                 ->leftJoin('user_game_history','user_game_history.FK_uid','=','user.uid')
                 ->selectRaw('user.uid, user.username, user.tel, user.email, user_game_detail.average_score, user_game_detail.total_win, user_game_detail.total_loss, MAX(user_game_history.score) as highest_score, COUNT(user_game_history.FK_uid) AS ttl_match')
                 ->groupBy('user.uid')
@@ -41,7 +41,5 @@ class GameRecord extends Model
                 ->orderBy('user_game_detail.average_score', 'DESC')
                 ->limit(10)
                 ->get();
-
-        return $players;
     }
 }
