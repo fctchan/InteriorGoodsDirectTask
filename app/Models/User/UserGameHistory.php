@@ -18,4 +18,14 @@ class UserGameHistory extends Model
      * @var array<int, int, string, int>
      */
     protected $fillable = ['user_id', 'game_record_id', 'result', 'score', ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function gameRecord()
+    {
+        return $this->belongsTo(GameRecord::class);
+    }
 }

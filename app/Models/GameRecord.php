@@ -39,4 +39,9 @@ class GameRecord extends Model
                 ->limit(10)
                 ->get();
     }
+
+    public function gameHistories()
+    {
+        return $this->hasMany(UserGameHistory::class);
+    }
 }

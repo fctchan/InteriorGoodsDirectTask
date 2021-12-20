@@ -18,4 +18,9 @@ class UserGameDetail extends Model
      * @var array<int, int, int, int>
      */
     protected $fillable = ['user_id', 'average_score', 'total_win', 'total_loss', ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

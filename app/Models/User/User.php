@@ -90,4 +90,14 @@ class User extends Model
     protected function updateUser($id, $user){
         return User::where('id', $id)->update(array('tel' => $user->tel, 'email'=> $user->email));
     }
+
+    public function gameDetails()
+    {
+        return $this->hasMany(UserGameDetail::class);
+    }
+
+    public function gameHistories()
+    {
+        return $this->hasMany(UserGameHistory::class);
+    }
 }
