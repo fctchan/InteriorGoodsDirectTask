@@ -55,7 +55,7 @@ class UserController extends Controller
         $user->email = request('email');
 
         //Call function to data into database
-        $saveResult = User::creatNewPlayer($user);
+        $saveResult = $user->save();
 
         //get all user to user list
         $users = User::getAllUser();
@@ -63,9 +63,10 @@ class UserController extends Controller
         //Render saving action result
         if ($saveResult){
             return view('User.userlist')->with('newPlayerName', $user->username)->with('users', $users);
-        }else{
-            return view('User.create')->with('errorConnectDB', 'createNew')->with('users', $users);
         }
+
+        return view('User.create')->with('errorConnectDB', 'createNew')->with('users', $users);
+
     }
 
     /**
@@ -74,10 +75,11 @@ class UserController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //Get selected player data from database
-        $user = User::showUser($id);
+        $user->load('gameDetails');
+
+        return view('User.gameRecord', compact('user'));
 
         //Get highest score
         $highest_score = $user[0]->highest_score;

@@ -30,8 +30,8 @@
                                     <td>{{ $player->gameDetails->total_win }}</td>
                                     <td>{{ $player->gameDetails->total_loss }}</td>
                                     <td>{{ $player->gameDetails->total_win + $player->gameDetails->total_loss }}</td>
-                                    <td>{{ $player->highestScoringGame->first()->score }} </td>
-                                    <td><a href="{{ route('User.show', $player->id)}}" class="btn btn-info">Game Record</a></td>
+                                    <td>{{ $player->highestScoringGame->score }} </td>
+                                    <td><a href="{{ route('users.show', $player->id)}}" class="btn btn-info">Game Record</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

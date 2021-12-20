@@ -103,8 +103,7 @@ class User extends Model
 
     public function highestScoringGame()
     {
-        return $this->gameHistories()
-            ->orderByDesc('score')
-            ->limit(1);
+        return $this->hasOne(UserGameHistory::class)
+            ->orderByDesc('score');
     }
 }

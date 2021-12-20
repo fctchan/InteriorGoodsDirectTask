@@ -13,7 +13,7 @@
                         <label class="col-md-4 col-form-label text-md-right">{{ __('Player Name:') }}</label>
 
                         <div class="col-md-4">
-                            {{ $user[0]->username }}
+                            {{ $user->username }}
                         </div>
                     </div>
 
@@ -21,7 +21,7 @@
                         <label class="col-md-4 col-form-label text-md-right">{{ __('Total Win(s):') }}</label>
 
                         <div class="col-md-4">
-                        {{ $user[0]->total_win }}
+                        {{ $user->gameDetails->total_win }}
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
                         <label class="col-md-4 col-form-label text-md-right">{{ __('Total Loss(es):') }}</label>
 
                         <div class="col-md-4">
-                        {{ $user[0]->total_loss }}
+                        {{ $user->gameDetails->total_loss }}
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                         <label class="col-md-4 col-form-label text-md-right">{{ __('Average Score:') }}</label>
 
                         <div class="col-md-4">
-                        {{ $user[0]->average_score }}
+                        {{ $user->gameDetails->average_score }}
                         </div>
                     </div>
 
@@ -45,13 +45,7 @@
                         <label class="col-md-4 col-form-label text-md-right">{{ __('Highest Score:') }}</label>
 
                         <div class="col-md-6">
-                        @if(isset($highestRecord))
-                            {{ $user[0]->highest_score }} (You {{$highestRecord[0]->player1Result}} this game)
-                            <br>
-                            ( Played with {{ $highestRecord[0]->username }} on {{ $highestRecord[0]->game_date }} )
-                        @else
-                            0 (No game played)
-                        @endif
+                            NB: This functionality is intentionally not refactored due to time.
                         </div>
                     </div>
 

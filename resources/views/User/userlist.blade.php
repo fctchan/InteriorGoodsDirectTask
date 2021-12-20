@@ -12,7 +12,7 @@
             </div>
         </div>
     @endif
-    
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -38,8 +38,8 @@
                                     <td>{{ $user->tel }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <a href="{{ route('User.edit', [$user->uid]) }}" class="btn btn-primary">{{ __('Edit') }}</a>
-                                        <a href="{{ route('User.show', [$user->uid])}}" class="btn btn-info">Game Record</a>
+                                        <a href="{{ route('users.edit', [$user->uid]) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                                        <a href="{{ route('users.show', [$user->uid])}}" class="btn btn-info">Game Record</a>
                                     </td>
                                 </tr>
                                 @endforeach
