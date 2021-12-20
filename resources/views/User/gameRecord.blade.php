@@ -45,9 +45,13 @@
                         <label class="col-md-4 col-form-label text-md-right">{{ __('Highest Score:') }}</label>
 
                         <div class="col-md-6">
-                        {{ $user[0]->highest_score }} (You {{$highestRecord[0]->player1Result}} this game)
-                        <br>
-                        ( Played with {{ $highestRecord[0]->username }} on {{ $highestRecord[0]->game_date }} )
+                        @if(isset($highestRecord))
+                            {{ $user[0]->highest_score }} (You {{$highestRecord[0]->player1Result}} this game)
+                            <br>
+                            ( Played with {{ $highestRecord[0]->username }} on {{ $highestRecord[0]->game_date }} )
+                        @else
+                            0 (No game played)
+                        @endif
                         </div>
                     </div>
 

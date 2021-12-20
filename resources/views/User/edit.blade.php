@@ -2,12 +2,18 @@
 
 @section('content')
 <div class="container">
-    @if(session('success'))
+    @if(Session::has('success'))
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="alert alert-success" role="alert">
-                    Player updated!
-                </div>
+                @if (session('success'))
+                    <div class="alert alert-success" role="alert">
+                        Player updated!
+                    </div>
+                @else
+                    <div class="alert alert-danger" role="alert">
+                        Something wrong! Cannot update player profile! Please try again later!
+                    </div>
+                @endif
             </div>
         </div>
     @endif

@@ -15,6 +15,18 @@
             </div>
         </div>
     @endif
+    
+    @if(isset($errorConnectDB))
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-danger" role="alert">
+                    @if ($errorConnectDB == 'createNew')
+                        Something wrong! New player "{{ $newPlayerName }}" cannot be created! Please find again later!
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endif
 
     <div class="row justify-content-center">
         <div class="col-md-8">

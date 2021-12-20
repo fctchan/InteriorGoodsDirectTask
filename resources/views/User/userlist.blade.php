@@ -31,7 +31,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (App\Models\User\User::orderBy('uid', 'ASC')->get() as $user)
+                                @foreach ($users as $user)
                                 <tr>
                                     <th scope="row">{{ $user->uid }}</th>
                                     <td>{{ $user->username }}</td>
