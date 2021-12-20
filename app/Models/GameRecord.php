@@ -23,23 +23,6 @@ class GameRecord extends Model
      */
     protected $fillable = ['game_date', ];
 
-    /**
-     * Get Top 10 players from database.
-     *
-     * @return array
-     */
-    protected function getTop10()
-    {
-        return User::leftJoin('user_game_details','users.id','=','user_game_details.user_id')
-                ->leftJoin('user_game_histories','user_game_histories.user_id','=','users.id')
-                ->selectRaw('users.id, users.username, users.tel, users.email, user_game_details.average_score, user_game_details.total_win, user_game_details.total_loss, MAX(user_game_histories.score) as highest_score, COUNT(user_game_histories.user_id) AS ttl_match')
-                ->groupBy('users.id')
-                ->havingRaw('ttl_match > 10')
-                ->orderBy('user_game_details.average_score', 'DESC')
-                ->limit(10)
-                ->get();
-    }
-
     public function gameHistories()
     {
         return $this->hasMany(UserGameHistory::class);

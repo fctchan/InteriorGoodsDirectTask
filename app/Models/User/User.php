@@ -93,11 +93,18 @@ class User extends Model
 
     public function gameDetails()
     {
-        return $this->hasMany(UserGameDetail::class);
+        return $this->hasOne(UserGameDetail::class);
     }
 
     public function gameHistories()
     {
         return $this->hasMany(UserGameHistory::class);
+    }
+
+    public function highestScoringGame()
+    {
+        return $this->gameHistories()
+            ->orderByDesc('score')
+            ->limit(1);
     }
 }

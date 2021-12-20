@@ -26,11 +26,11 @@
                                 <tr>
                                     <th scope="row">{{ $seq++ }}</th>
                                     <td>{{ $player->username }}</td>
-                                    <td>{{ $player->average_score }}</td>
-                                    <td>{{ $player->total_win }}</td>
-                                    <td>{{ $player->total_loss }}</td>
-                                    <td>{{ $player->ttl_match }}</td>
-                                    <td>{{ $player->highest_score }} </td>
+                                    <td>{{ $player->gameDetails->average_score }}</td>
+                                    <td>{{ $player->gameDetails->total_win }}</td>
+                                    <td>{{ $player->gameDetails->total_loss }}</td>
+                                    <td>{{ $player->gameDetails->total_win + $player->gameDetails->total_loss }}</td>
+                                    <td>{{ $player->highestScoringGame->first()->score }} </td>
                                     <td><a href="{{ route('User.show', $player->id)}}" class="btn btn-info">Game Record</a></td>
                                 </tr>
                             @endforeach
